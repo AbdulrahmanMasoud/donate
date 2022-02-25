@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+  <section className='App-header'>
+      <div className='title'>
+        <h1>Donate for us</h1>
+      </div>
+
+      <div className='address'>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <strong>Our Address: </strong>
+          <small className='color-light'>0x5732493df2be20ab49c408ca149c3eb78b9dc015520705144716d691e2573488</small>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+
+      <div className='actions'>
+        <div className='action-message'>
+          You will donate us: <small className='color-light'>0.02 ETH</small>
+        </div>
+        <button className='donate btn'>Donate Us</button>
+      </div>
+    </section>
     </div>
   );
 }
