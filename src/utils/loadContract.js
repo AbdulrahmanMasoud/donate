@@ -1,7 +1,7 @@
-import contract from "@truffle/contract"
+import contract from "@truffle/contract";
 
 export const loadContract = async (name,provider) => {
-    const contractFile = await fetch(`/build/${name}.json`);
+    const contractFile = await fetch(`/build/contracts/${name}.json`);
     const convertContractTojson = await contractFile.json();
 
     const _myContract = contract(convertContractTojson);

@@ -1,6 +1,41 @@
+import {useState,useEffect} from "react";
+import React from 'react';
 import './App.css';
+import Web3 from "web3";
+import detectEthereumProvider from '@metamask/detect-provider';
+import {loadContract} from "./utils/loadContract.js";
 
 function App() {
+
+  const [web3Api, setweb3Api] = useState({
+    provider: null,
+    web3: null,
+    contract: null
+  })
+
+  useEffect(()=>{
+    const loadProvider = async ()=>{
+      const provider = await detectEthereumProvider()
+
+      if(provider){
+        console.log('Ethereum successfully detected!')
+        const contract = await loadContract("Donates",provider);
+        setweb3Api({
+          provider,
+          web3:new Web3(provider),
+          contract
+        })
+
+        console.log(provider)
+      }else{
+        console.error("Pleas Install MetaMask")
+      }
+    }
+    loadProvider();
+  },[]);
+
+
+
   return (
     <div className="App">
   <section className='App-header'>
