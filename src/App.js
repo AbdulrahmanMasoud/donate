@@ -18,15 +18,16 @@ function App() {
       const provider = await detectEthereumProvider()
 
       if(provider){
-        console.log('Ethereum successfully detected!')
+        // console.log('Ethereum successfully detected!')
         const contract = await loadContract("Donates",provider);
+        
         setweb3Api({
           provider,
           web3:new Web3(provider),
           contract
         })
 
-        console.log(provider)
+        // console.log(provider)
       }else{
         console.error("Pleas Install MetaMask")
       }
@@ -35,6 +36,17 @@ function App() {
   },[]);
 
 
+const [account, setAccount] = useState(null);
+
+useEffect(()=>{
+  const getAccount = async()=>{
+    const accounts = await web3Api.web3.eth.getAccounts();
+    console.log(accounts);
+
+    setAccount(accounts[0]);
+  }
+  web3Api.web3 && getAccount();
+},[web3Api.web3]);
 
   return (
     <div className="App">
@@ -46,7 +58,10 @@ function App() {
       <div className='address'>
         <p>
           <strong>Our Address: </strong>
-          <small className='color-light'>0x5732493df2be20ab49c408ca149c3eb78b9dc015520705144716d691e2573488</small>
+          {
+            account?
+            <small className='color-light'>{account}</small>: <span>No account</span>
+          }
         </p>
       </div>
 
